@@ -583,6 +583,10 @@ contract AbstractAdapterTest is PropertyTest {
         uint256 oldTotalAssets = adapter.totalAssets();
         adapter.setPerformanceFee(performanceFee);
         increasePricePerShare(raise);
+        uint256 newTotalAssets = adapter.totalAssets();
+
+        assertGt(newTotalAssets, oldTotalAssets, "assertGt assets");
+        
 
         uint256 gain = ((adapter.convertToAssets(1e18) -
             adapter.highWaterMark()) * adapter.totalSupply()) / 1e18;
